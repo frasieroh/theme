@@ -1,9 +1,10 @@
-setopt nopromptbang prompt{cr,percent,sp,subst}
+# https://github.com/zsh-users/zsh/blob/master/Misc/vcs_info-examples
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' enable git p4
+zstyle ':vcs_info:git*' formats "%b " 
 
-zstyle ':zim:git-info:branch' format '%b'
-zstyle ':zim:git-info:dirty' format '*'
-zstyle ':zim:git-info:keys' format 'prompt' '%b%D '
-autoload -Uz add-zsh-hook && add-zsh-hook precmd git-info
+setopt prompt_subst
+precmd() { vcs_info }
 
-PS1='%B%F{white}%n@%m %B%F{cyan}%~ %B%F{white}${(e)git_info[prompt]}%f%b'
+PS1='%B%F{white}%n@%m %B%F{cyan}%~ %B%F{white}${vcs_info_msg_0_}%f%b'
 unset RPS1
