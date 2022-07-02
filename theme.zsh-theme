@@ -1,8 +1,9 @@
 # https://github.com/zsh-users/zsh/blob/master/Misc/vcs_info-examples
+setopt nopromptbang prompt{cr,percent,sp,subst}
+
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git p4
 zstyle ':vcs_info:git*' formats "%b " 
-
 setopt prompt_subst
 precmd() { vcs_info }
 
